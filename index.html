@@ -3,42 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KickzHub - Premium Sneakers & Shoes</title>
+    <title>NeonKicks - Retro Streetwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
-        
+        body { 
+            font-family: 'Orbitron', monospace; 
+            background: linear-gradient(45deg, #0f0f23, #1a0033, #330066); 
+            color: #fff; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120,219,255,0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgShift 20s ease infinite;
+        }
+
         /* Header */
-        header { background: linear-gradient(135deg, #ff6b6b, #4ecdc4); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        header { 
+            position: fixed; width: 100%; 
+            background: rgba(15,15,35,0.95); 
+            backdrop-filter: blur(20px); 
+            z-index: 1000; 
+            padding: 1rem 0;
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0,255,255,0.3);
+        }
         nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: #ffd700; }
-        .hamburger { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
-        
+        .logo { 
+            font-family: 'Press Start 2P', cursive; 
+            font-size: 1.2rem; 
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-shadow: 0 0 20px currentColor;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 700; 
+            position: relative;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+        .nav-links a:hover { 
+            color: #00ffff; 
+            text-shadow: 0 0 20px #00ffff;
+            transform: translateY(-3px);
+        }
+
         /* Hero */
-        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; margin-top: 80px; }
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; animation: fadeInUp 1s ease; }
-        .hero-content p { font-size: 1.3rem; margin-bottom: 2rem; animation: fadeInUp 1s ease 0.2s both; }
-        .cta-btn { background: #ff6b6b; color: white; padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.4s both; }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,107,107,0.4); }
-        
-        /* Products */
-        .products { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .product-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .product-img { width: 100%; height: 250px; object-fit: cover; }
-        .product-info { padding: 1.5rem; }
-        .product-title { font-size: 1.3rem; margin-bottom: 0.5rem; color: #333; }
-        .product-price { font-size: 1.5rem; color: #ff6b6b; font-weight: bold; margin-bottom: 1rem; }
-        .product-btn { background: #4ecdc4; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; width: 100%; transition: background 0.3s; }
-        .product-btn:hover { background: #45b7aa; }
-        
-        /* Testimonials */
-        .testimonials { background: #f8f9fa; padding: 5rem 2rem; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .testimonial { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3133?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, rgba(15,15,35,0.8), rgba(26,0,51,0.8));
+        }
+        .hero-content { position: relative; z-index: 2; animation: bounceIn 1.5s ease; }
+        .hero h1 { 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ff00); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-shadow: 0 0 40px currentColor;
+            margin-bottom: 1rem;
+            animation: glitch 2s infinite;
+        }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; font-weight: 300; }
+        .cta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 600px; margin: 0 auto; }
+        .cta-btn { 
+            background: linear-gradient(45deg, #00ffff, #ff00ff); 
+            color: #000; 
+            padding: 1.2rem 2rem; 
+            border: none; 
+            border-radius: 10px; 
+            font-family: 'Orbitron', monospace; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            position: relative; 
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,255,255,0.4);
+        }
+        .cta-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s;
+        }
+        .cta-btn:hover::before { left: 100%; }
+        .cta-btn:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 20px 50px rgba(0,255,255,0.6); }
+
+        /* Collections */
+        .collections { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-title { 
+            text-align: center; 
+            font-size: 3rem; 
+            font-weight: 900; 
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, #ffff00, #ff00ff); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px currentColor;
+        }
+        .collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .collection-card { 
+            background: rgba(255,255,255,0.05); 
+            border: 2px solid rgba(0,255,255,0.3); 
+            border-radius: 20px; 
+            padding: 2.5rem; 
+            text-align: center; 
+            position: relative;
+            transition: all 0.4s;
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+        }
+        .collection-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(0,255,255,0.1), transparent); animation: rotate 4s linear infinite; opacity: 0; transition: opacity 0.3s;
+        }
+        .collection-card:hover::before { opacity: 1; }
+        .collection-card:hover { 
+            transform: translateY(-20px) scale(1.02); 
+            border-color: #00ffff; 
+            box-shadow: 0 30px 80px rgba(0,255,255,0.4);
+        }
+        .collection-icon { font-size: 4rem; margin-bottom: 1.5rem; background: linear-gradient(45deg, #00ffff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .collection-card h3 { font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700; }
+        .collection-card .price { font-size: 2.5rem; font-weight: 900; background: linear-gradient(45deg, #ffff00, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        .collection-stats { display: flex; justify-content: space-around; font-size: 0.9rem; opacity: 0.8; }
+
+        /* Features */
+        .features { 
+            background: linear-gradient(135deg, rgba(255,0,255,0.1), rgba(0,255,255,0.1)); 
+            padding: 6rem 2rem; 
+            margin: 4rem 0;
+        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .feature { text-align: center; padding: 2rem; }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; color: #00ffff; animation: float 3s ease-in-out infinite; }
+        .feature h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+        /* Footer */
+        footer { 
+            background: rgba(15,15,35,0.95); 
+            padding: 3rem 2rem 1rem; 
+            text-align: center; 
+            border-top: 3px solid #ff00ff;
+        }
+        .newsletter { margin-bottom: 2rem; }
+        .newsletter input { 
+            background: rgba(255,255,255,0.1); 
+            border: 2px solid #00ffff; 
+            padding: 1rem 1.5rem; 
+            border-radius: 50px; 
+            color: #fff; 
+            font-family: inherit; 
+            width: 300px; 
+            margin-right: 1rem;
+        }
+        .newsletter button { 
+            background: linear-gradient(45deg, #ff00ff, #00ffff); 
+            border: none; 
+            padding: 1rem 2rem; 
+            border-radius: 50px; 
+            color: #000; 
+            font-weight: 700; 
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes bgShift { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.1) rotate(180deg); } }
+        @keyframes glow { 0% { text-shadow: 0 0 20px currentColor; } 100% { text-shadow: 0 0 30px currentColor, 0 0 40px currentColor; } }
+        @keyframes glitch { 0%, 100% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } }
+        @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .cta-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .newsletter input { width: 100%; margin-bottom: 1rem; margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">NEONKICKS</a>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#collections">COLLECTIONS</a></li>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>RETRO FUTURE</h1>
+            <p>Vaporwave sneakers for the neon generation. Limited edition drops.</p>
+            <div class="cta-grid">
+                <button class="cta-btn">SHOP NOW</button>
+                <button class="cta-btn">VIEW DROPS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section id="collections" class="collections">
+        <h2 class="section-title">LIMITED DROPS</h2>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <div class="collection-icon">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <h3>Cyber Dunk</h3>
+                <div class="price">¥420</div>
+                <div class="collection-stats">
+                    <span><i class="fas fa-fire"></i> 99/100</span>
+                    <span><i class="fas fa-clock"></i> 3h left</span>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3>Neon Max</h3>
+                <div class="price">¥666</div>
+                <div class="collection-stats">
+                    <span><i class="fas fa-fire"></i> 47/50</span>
+                    <span><i class="fas fa-clock"></i> 12h left</span>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Glitch Force</h3>
+                <div class="price">¥888</div>
+                <div class="collection-stats">
+                    <span><i class="fas fa-fire"></i> 23/25</span>
+                    <span><i class="fas fa-clock"></i> 6h left</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>100% Authentic</h4>
+                <p>Verified sneakers with certificate of authenticity</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h4>Worldwide Shipping</h4>
+                <p>Fast & tracked delivery to 200+ countries</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-undo"></div>
+                </div>
+                <h4>14 Day Returns</h4>
+                <p>Hassle-free returns & exchanges</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h4>Secure Checkout</h4>
+                <p>SSL encrypted. Trusted by 10k+ collectors</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="newsletter">
+            <h3>GET NOTIFIED ON DROPS</h3>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                <input type="email" placeholder="Enter your wallet address...">
+                <button>NOTIFY ME</button>
+            </div>
+        </div>
+        <div style="margin-top: 2rem;">
+            <div class="social-icons" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem;">
+                <a href="#"><i class="fab fa-discord" style="font-size: 1.5rem;"></i></a>
+                <a href="#"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a>
+                <a href="#"><i class="fab fa-instagram" style="font-size: 1.5rem;"></i></a>
+            </div>
+            <p style="opacity: 0.7; font-size: 0.9rem;">© 2024 NEONKICKS | BUILT IN THE MATRIX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('header-scrolled', window.scrollY > 
